@@ -1,4 +1,4 @@
-import {createConnection, Connection} from "mysql2/promise";
+import { createConnection, Connection } from "mysql2/promise";
 import config from "./config";
 
 type Execute = (connection: Connection) => Promise<any>;
@@ -8,7 +8,13 @@ const connection = async (exec: Execute) => {
   let data;
   try {
     connection = await createConnection(config.mysql);
-    data =  exec(connection);
+    data = exec(connection);
+  } catch (e) {
+    if (connection) {
+      await connection.rollback();
+      await connection.end();
+    }
+    throw e;
   } finally {
     if (connection) {
       await connection.end();

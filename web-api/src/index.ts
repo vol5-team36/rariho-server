@@ -2,6 +2,7 @@ import express from "express";
 import errorHandler from "./error";
 import config from "./config";
 import skillsResource from "./resource/skills_resource";
+import manegementsResource from "./resource/manegements_resource";
 
 const app: express.Express = express();
 
@@ -25,6 +26,7 @@ app.use(
 
 app.use(errorHandler);
 app.use(config.apiBasePath + "/skills", skillsResource);
+app.use("/managements", manegementsResource);
 
 app.listen(config.port, () => {
   console.log("Start on port " + config.port + ".");
