@@ -4,14 +4,18 @@ import {
   badRequestException,
   HttpException,
   internalServerErrorException,
+  notFoundException,
 } from "../error";
 import { IProfileDocument } from "../service/profiles_document_schema";
 import {
   getProfile,
-  ProfileDocument,
+  objectToProfileDocument,
   uploadProfile,
 } from "../service/profiles_document_service";
-import { addProfile } from "../service/profiles_service";
+import {
+  getProfile as getProfileEntity,
+  addProfile,
+} from "../service/profiles_service";
 
 const router = express.Router();
 
@@ -20,7 +24,13 @@ router.get(
   async (req: express.Request, res: express.Response, next) => {
     try {
       const profileId = parseInt(req.params.profileId);
+      if (!(await getProfileEntity(profileId))) {
+        throw notFoundException();
+      }
       const profile = await getProfile(profileId);
+      if (!profile) {
+        throw notFoundException();
+      }
       let image;
       if (fs.existsSync(getImagePath(profileId))) {
         image = fs.readFileSync(getImagePath(profileId));
@@ -42,7 +52,13 @@ router.get(
 
 router.post("/", async (req: express.Request, res: express.Response, next) => {
   try {
-    const profile = req.body as ProfileDocument;
+    let profile;
+    try {
+      profile = objectToProfileDocument(req.body);
+    } catch (e) {
+      console.error(e);
+      throw badRequestException("400 Bad Request", "InvalidParameter");
+    }
     const image = profile.image;
     const profileId = await addProfile();
     profile.profile_id = profileId;
@@ -58,7 +74,7 @@ router.post("/", async (req: express.Request, res: express.Response, next) => {
       }
     }
     await uploadProfile(profile as IProfileDocument);
-    res.send();
+    res.send({ profile_id: profileId });
   } catch (e) {
     console.error(e);
     if (e instanceof HttpException) {

@@ -5,17 +5,15 @@ export interface IProfileDocument {
   _id?: string;
   profile_id: number;
   name: string;
-  github_account: string;
-  twitter_account: string;
-  url: string;
-  comment: string;
-  skills: [
-    {
-      id: number;
-      order: number;
-      rank: number;
-    }
-  ];
+  github_account?: string;
+  twitter_account?: string;
+  url?: string;
+  comment?: string;
+  skills: Array<{
+    id: number;
+    order: number;
+    rank: number;
+  }>;
 }
 
 export function schemaToObject(schema: IProfileDocument): ProfileDocument {

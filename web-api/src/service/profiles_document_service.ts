@@ -8,15 +8,27 @@ export interface ProfileDocument {
   profile_id?: number;
   name: string;
   image?: string;
-  github_account: string;
-  twitter_account: string;
-  url: string;
-  comment: string;
+  github_account?: string;
+  twitter_account?: string;
+  url?: string;
+  comment?: string;
   skills: Array<{
     id: number;
     order: number;
     rank: number;
   }>;
+}
+
+export function objectToProfileDocument(profile: any): ProfileDocument {
+  return {
+    profile_id: profile.profile_id || null,
+    name: profile.name,
+    github_account: profile.github_account || null,
+    twitter_account: profile.twitter_account || null,
+    url: profile.url || null,
+    comment: profile.comment || null,
+    skills: profile.skills || [],
+  };
 }
 
 export const uploadProfile = async (profile: IProfileDocument) => {

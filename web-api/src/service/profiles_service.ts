@@ -10,3 +10,13 @@ export const addProfile = async (): Promise<number> => {
   });
   return id;
 };
+
+export const getProfile = async (profileId: number): Promise<any> => {
+  const data: Array<Object> = await connection(async (c) => {
+    const [data] = await c.query("select * from profiles where id = ?", [
+      profileId,
+    ]);
+    return data;
+  });
+  return data[0];
+};
