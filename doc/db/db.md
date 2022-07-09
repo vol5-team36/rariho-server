@@ -33,7 +33,7 @@
 | skills[].order  | number   | スキルの順番(0~)                    |
 | skills[].rank   | number   | スキルのランク                      |
 | skills[].name   | string   | スキル名<br>ID=0 の場合のみ入力     |
-| skills[].type   | string   | タイプ ('langage' or 'framework')   |
+| skills[].type   | string   | タイプ ('language' or 'framework')  |
 
 ```javascript
 {

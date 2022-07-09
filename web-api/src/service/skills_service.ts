@@ -1,4 +1,4 @@
-import connection from "../mysql";
+import connection, { idgen } from "../mysql";
 
 export interface Skill {
   id: number;
@@ -6,7 +6,7 @@ export interface Skill {
 }
 
 export enum Type {
-  langage = "langage",
+  language = "language",
   framework = "framework",
 }
 

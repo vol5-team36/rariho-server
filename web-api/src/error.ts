@@ -4,7 +4,7 @@ type errorData = {
   [key: string]: any;
 };
 
-class HttpException extends Error {
+export class HttpException extends Error {
   statusCode?: number;
   message: string;
   data: errorData;
@@ -45,6 +45,12 @@ export const forbiddenException = (
   data?: errorData
 ): HttpException => {
   return new HttpException(403, message, code, data);
+};
+
+export const internalServerErrorException = (
+  message = "500 InternalServerError",
+): HttpException => {
+  return new HttpException(500, message, "InternalServerError");
 };
 
 export const unauthorizedException = (
