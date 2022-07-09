@@ -14,4 +14,6 @@ cdk.context.json
 docker/mongo/db
 docker/mysql/data
 
+store/
+
 .env
