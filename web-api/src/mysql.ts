@@ -12,13 +12,8 @@ const connection = async (exec: Execute) => {
   } catch (e) {
     if (connection) {
       await connection.rollback();
-      await connection.end();
     }
     throw e;
-  } finally {
-    if (connection) {
-      await connection.end();
-    }
   }
   return data;
 };

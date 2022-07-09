@@ -12,10 +12,11 @@ router.post(
       await addSkills(skills);
       res.status(200).send();
     } catch (e) {
+      console.error(e);
       if (e instanceof HttpException) {
-        throw e;
+        next(e);
       } else {
-        throw internalServerErrorException();
+        next(internalServerErrorException());
       }
     }
   }
@@ -29,10 +30,11 @@ router.delete(
       await deleteSkill(parseInt(skillId));
       res.status(204).send();
     } catch (e) {
+      console.error(e);
       if (e instanceof HttpException) {
-        throw e;
+        next(e);
       } else {
-        throw internalServerErrorException();
+        next(internalServerErrorException());
       }
     }
   }
