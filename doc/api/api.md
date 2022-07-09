@@ -12,9 +12,9 @@ GET /api/skills
 
 | param                   | type   | description    |
 | ----------------------- | ------ | -------------- |
-| skills.langages[]       | array  | 言語           |
-| skills.langages[].id    | number | スキル ID      |
-| skills.langages[].name  | string | スキル名       |
+| skills.languages[]      | array  | 言語           |
+| skills.languages[].id   | number | スキル ID      |
+| skills.languages[].name | string | スキル名       |
 | skills.framework[]      | array  | フレームワーク |
 | skills.framework[].id   | number | スキル ID      |
 | skills.framework[].name | string | スキル名       |
@@ -22,7 +22,7 @@ GET /api/skills
 ```javascript
 {
     "skills": {
-        "langages": [
+        "languages": [
             {
                 "id": number,
                 "name": string,
@@ -58,7 +58,7 @@ POST /api/profiles
 | skills[].order  | number | スキルの順番(0~)                                                    |
 | skills[].rank   | number | スキルのランク                                                      |
 | skills[].name   | string | スキル名<br>ID=0 の場合のみ入力                                     |
-| skills[].type   | string | タイプ ('langage' or 'framework')                                   |
+| skills[].type   | string | タイプ ('language' or 'framework')                                  |
 
 ```javascript
 {
