@@ -1,5 +1,22 @@
 version: "3"
 services:
+  web:
+    build: ./web-api
+    ports:
+      - 3001:3000
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=rariho
+      - MYSQL_PASSWORD=rariho
+      - MYSQL_DATABASE=rariho
+    volumes:
+      - ./web-api:/app
+    depends_on:
+      - mysql
+      - mongo
+    networks:
+      - rariho-network
   mongo:
     image: mongo
     restart: always
@@ -19,7 +36,7 @@ services:
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/data:/var/lib/mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       MYSQL_DATABASE: rariho
       MYSQL_USER: rariho
       MYSQL_PASSWORD: rariho
