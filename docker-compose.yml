@@ -17,6 +17,7 @@ services:
       - MONGO_DATABASE=rariho
     volumes:
       - ./web-api:/app
+    command: npm run start
     depends_on:
       - mysql
       - mongo
