@@ -1,0 +1,34 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rariho
+      MONGO_INITDB_ROOT_PASSWORD: rariho
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/mongo/db:/data/db
+      - ./docker/mongo/configdb:/data/configdb
+  mysql:
+    image: mysql:8.0
+    platform: linux/x86_64
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: rariho
+      MYSQL_USER: rariho
+      MYSQL_PASSWORD: rariho
+      TZ: Asia/Tokyo
+    ports:
+      - 3306:3306
+    networks:
+      - rariho-network
+
+networks:
+  rariho-network:
+    driver: bridge
