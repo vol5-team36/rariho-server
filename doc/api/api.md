@@ -10,20 +10,33 @@ GET /api/skills
 
 #### 成功時
 
-| param         | type   | description |
-| ------------- | ------ | ----------- |
-| skills[].id   | number | スキル ID   |
-| skills[].name | string | スキル名    |
+| param                   | type   | description    |
+| ----------------------- | ------ | -------------- |
+| skills.langages[]       | array  | 言語           |
+| skills.langages[].id    | number | スキル ID      |
+| skills.langages[].name  | string | スキル名       |
+| skills.framework[]      | array  | フレームワーク |
+| skills.framework[].id   | number | スキル ID      |
+| skills.framework[].name | string | スキル名       |
 
 ```javascript
 {
-    "skills": [
-        {
-            "id": number,
-            "name": string,
-        },
-        ...
-    ]
+    "skills": {
+        "langages": [
+            {
+                "id": number,
+                "name": string,
+            },
+            ...
+        ],
+        "framework": [
+            {
+                "id": number,
+                "name": string,
+            },
+            ...
+        ],
+    }
 }
 ```
 
@@ -41,9 +54,11 @@ POST /api/profiles
 | twitter_account | string | twitter のアカウント                                                |
 | url             | string | url                                                                 |
 | comment         | string | 一言コメント                                                        |
-| skills[].id     | number | スキル ID                                                           |
+| skills[].id     | number | スキル ID<br>0 の場合はその他とする                                 |
 | skills[].order  | number | スキルの順番(0~)                                                    |
 | skills[].rank   | number | スキルのランク                                                      |
+| skills[].name   | string | スキル名<br>ID=0 の場合のみ入力                                     |
+| skills[].type   | string | タイプ ('langage' or 'framework')                                   |
 
 ```javascript
 {
@@ -56,8 +71,10 @@ POST /api/profiles
     "skills": [
         {
             "id": number,
+            "name": string,
             "order": number,
             "rank": number,
+            "type": string,
         },
         ...
     ]
