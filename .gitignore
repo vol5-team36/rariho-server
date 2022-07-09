@@ -12,6 +12,7 @@ cdk.context.json
 
 .vscode
 
-docker/db/data
+docker/mongo/db
+docker/mysql/data
 
 .env
