@@ -2,9 +2,13 @@ import express from "express";
 import errorHandler from "./error";
 import config from "./config";
 import skillsResource from "./resource/skills_resource";
+import profilesResource from "./resource/profiles_resource";
 import manegementsResource from "./resource/manegements_resource";
+import { connectDB } from "./mongodb";
 
 const app: express.Express = express();
+
+connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,9 +28,11 @@ app.use(
   }
 );
 
-app.use(errorHandler);
 app.use(config.apiBasePath + "/skills", skillsResource);
+app.use(config.apiBasePath + "/profiles", profilesResource);
 app.use("/managements", manegementsResource);
+
+app.use(errorHandler);
 
 app.listen(config.port, () => {
   console.log("Start on port " + config.port + ".");

@@ -10,6 +10,11 @@ services:
       - MYSQL_USER=rariho
       - MYSQL_PASSWORD=rariho
       - MYSQL_DATABASE=rariho
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_USER=rariho
+      - MONGO_PASSWORD=rariho
+      - MONGO_DATABASE=rariho
     volumes:
       - ./web-api:/app
     depends_on:
@@ -21,13 +26,18 @@ services:
     image: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: rariho
-      MONGO_INITDB_ROOT_PASSWORD: rariho
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: rariho
+      TZ: Asia/Tokyo
     ports:
       - 27017:27017
     volumes:
       - ./docker/mongo/db:/data/db
       - ./docker/mongo/configdb:/data/configdb
+      - ./docker/mongo/initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - rariho-network
   mysql:
     image: mysql:8.0
     platform: linux/x86_64
