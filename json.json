@@ -9,12 +9,16 @@
     {
       "id": 0,
       "order": 0,
-      "rank": 0
+      "rank": 0,
+      "name": "Java",
+      "type": "language"
     },
     {
       "id": 1,
       "order": 1,
-      "rank": 1
+      "rank": 1,
+      "name": "React.js",
+      "type": "framework"
     }
   ]
 }
