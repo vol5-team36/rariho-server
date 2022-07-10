@@ -32,13 +32,14 @@
 | skills[].id     | number   | スキル ID<br>0 の場合はその他とする |
 | skills[].order  | number   | スキルの順番(0~)                    |
 | skills[].rank   | number   | スキルのランク                      |
-| skills[].name   | string   | スキル名<br>ID=0 の場合のみ入力     |
+| skills[].name   | string   | スキル名                            |
 | skills[].type   | string   | タイプ ('language' or 'framework')  |
 
 ```javascript
 {
     "_id": ObjectID,
     "profile_id": number,
+    "layout_id": number,
     "name": string,
     "github_account": string,
     "twitter_account": string,

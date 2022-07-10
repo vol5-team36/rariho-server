@@ -15,9 +15,9 @@ GET /api/skills
 | skills.languages[]      | array  | 言語           |
 | skills.languages[].id   | number | スキル ID      |
 | skills.languages[].name | string | スキル名       |
-| skills.framework[]      | array  | フレームワーク |
-| skills.framework[].id   | number | スキル ID      |
-| skills.framework[].name | string | スキル名       |
+| skills.frameworks[]      | array  | フレームワーク |
+| skills.frameworks[].id   | number | スキル ID      |
+| skills.frameworks[].name | string | スキル名       |
 
 ```javascript
 {
@@ -29,7 +29,7 @@ GET /api/skills
             },
             ...
         ],
-        "framework": [
+        "frameworks": [
             {
                 "id": number,
                 "name": string,
@@ -57,7 +57,7 @@ POST /api/profiles
 | skills[].id     | number | スキル ID<br>0 の場合はその他とする                                 |
 | skills[].order  | number | スキルの順番(0~)                                                    |
 | skills[].rank   | number | スキルのランク                                                      |
-| skills[].name   | string | スキル名<br>ID=0 の場合のみ入力                                     |
+| skills[].name   | string | スキル名                                                            |
 | skills[].type   | string | タイプ ('language' or 'framework')                                  |
 
 ```javascript
@@ -134,6 +134,8 @@ GET /api/profiles/{profile_id}
 | skills[].id     | number | スキル ID                                                           |
 | skills[].order  | number | スキルの順番(0~)                                                    |
 | skills[].rank   | number | スキルのランク                                                      |
+| skills[].name   | string | スキル名                                                            |
+| skills[].type   | string | タイプ ('language' or 'framework')                                  |
 
 ```javascript
 {
@@ -148,6 +150,8 @@ GET /api/profiles/{profile_id}
             "id": number,
             "order": number,
             "rank": number,
+            "name": string,
+            "type": string,
         },
         ...
     ]

@@ -3,6 +3,7 @@ import ProfileDocumentSchema, {
   IProfileDocument,
   schemaToObject,
 } from "./profiles_document_schema";
+import { Type } from "./skills_service";
 
 export interface ProfileDocument {
   profile_id?: number;
@@ -16,6 +17,8 @@ export interface ProfileDocument {
     id: number;
     order: number;
     rank: number;
+    name: string;
+    type: Type;
   }>;
 }
 

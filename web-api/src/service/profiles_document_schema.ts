@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ProfileDocument } from "./profiles_document_service";
+import { Type } from "./skills_service";
 
 export interface IProfileDocument {
   _id?: string;
@@ -13,12 +14,20 @@ export interface IProfileDocument {
     id: number;
     order: number;
     rank: number;
+    name: string;
+    type: Type;
   }>;
 }
 
 export function schemaToObject(schema: IProfileDocument): ProfileDocument {
   const skills = schema.skills.map((s) => {
-    return { id: s.id, order: s.order, rank: s.rank };
+    return {
+      id: s.id,
+      order: s.order,
+      rank: s.rank,
+      name: s.name,
+      type: s.type,
+    };
   });
   return {
     profile_id: schema.profile_id,
@@ -69,6 +78,14 @@ const profileSchema = new mongoose.Schema({
       },
       rank: {
         type: mongoose.Schema.Types.Number,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      type: {
+        type: String,
         required: true,
       },
     },
