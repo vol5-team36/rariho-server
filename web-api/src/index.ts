@@ -4,11 +4,13 @@ import config from "./config";
 import skillsResource from "./resource/skills_resource";
 import profilesResource from "./resource/profiles_resource";
 import manegementsResource from "./resource/manegements_resource";
-import { connectDB } from "./mongodb";
+import { connectDB as connectMongo } from "./mongodb";
+import { connectDB as connectMySQL } from "./mysql";
 
 const app: express.Express = express();
 
-connectDB();
+connectMongo();
+connectMySQL();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

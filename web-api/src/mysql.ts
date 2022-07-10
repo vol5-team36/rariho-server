@@ -3,15 +3,24 @@ import config from "./config";
 
 type Execute = (connection: Connection) => Promise<any>;
 
+let mySqlConnection: Connection;
+export const connectDB = async () => {
+  try {
+    mySqlConnection = await createConnection(config.mysql);
+    console.log(`MySQL Connected ${mySqlConnection.config.host}`);
+  } catch (e: any) {
+    console.error(`Error: ${e.message}`);
+    process.exit(1);
+  }
+};
+
 const connection = async (exec: Execute) => {
-  let connection;
   let data;
   try {
-    connection = await createConnection(config.mysql);
-    data = exec(connection);
+    data = exec(mySqlConnection);
   } catch (e) {
-    if (connection) {
-      await connection.rollback();
+    if (mySqlConnection) {
+      await mySqlConnection.rollback();
     }
     throw e;
   }
