@@ -24,7 +24,7 @@ router.get(
   async (req: express.Request, res: express.Response, next) => {
     try {
       const profileId = parseInt(req.params.profileId);
-      if (!(await getProfileEntity(profileId))) {
+      if (!profileId || !(await getProfileEntity(profileId))) {
         throw notFoundException();
       }
       const profile = await getProfile(profileId);
